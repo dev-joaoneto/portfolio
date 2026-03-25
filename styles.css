@@ -27,6 +27,7 @@ canvas {
 
 .secao {
     padding: 80px 0;
+    min-height: 100vh;
 
 }
 
@@ -89,7 +90,7 @@ li a {
     display: flex;
     align-items: center;
     margin-left: 30px;
-    min-height: 90vh;
+    min-height: 100vh;
 }
 
 .principal h1 {
@@ -151,9 +152,30 @@ li a {
     width: 100%;
 }
 
-.img-sobre {
-    width: 360px;
-    border-radius: 20px;
+.img {
+    position: relative;
+    display: inline-block;
+    width:360px;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.img .img-sobre {
+    display: block;
+    
+}
+
+.img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.2),   
+    rgba(0, 0, 0, 0.1),   
+    rgba(0, 0, 0, 0)      
+  );
+  pointer-events: none;
 }
 
 
@@ -191,6 +213,8 @@ li a {
 
 .carrossel-habilidades {
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 20px;
     white-space: nowrap;
     width: max-content;
@@ -260,6 +284,15 @@ li a {
     border-radius: 10px;
 }
 
+#projetos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
 .projeto-carrossel-wrapper {
     position: relative;
     overflow: hidden;
@@ -291,81 +324,114 @@ li a {
 }
 
 .carrossel-btn.prev {
-    left: 12px;
+    left: 100px;
 }
 
 .carrossel-btn.next {
-    right: 12px;
-}
-
-.projeto-viewport {
-    overflow: hidden;
-    width: 100%;
-}
-
-.projeto-carrossel {
-    display: flex;
-    gap: 2rem;
-    will-change: transform;
-    transition: transform 0.45s ease
-}
-
-.projeto-card {
-    min-width: 320px;
-    flex-shrink: 0;
-
+    right: 100px;
 }
 
 .projeto-container {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    overflow:hidden;
 }
+
+.projeto-viewport {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    max-width: 1000px; 
+    aspect-ratio: 15/7;
+    margin: 0 auto;
+
+    overflow: hidden;
+    background: rgba(26, 26, 26, 0.5);
+    border-radius: 20px;
+} 
+
+.projeto-carrossel {
+    display: flex;
+    will-change: transform;
+    transition: transform 0.6s ease
+} 
+
+.card-content {
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 15/7;
+  height: 100%;
+  margin: 0 auto;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content:flex-end;
+  align-items: center;
+  
+  
+  border-radius: 20px;
+  overflow: hidden;
+
+  transition: transform 0.3s; 
+}
+
+.card-content:hover {
+  transform: scale(1.03);
+}
+
 
 .projeto-cards {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 0 80px 20px 20px;
 }
 
 .projeto-card {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    background: rgba(26, 26, 26, 0.7);
-    width: 33%;
-    height: 55vh;
-    padding: 10px;
+    
+    min-width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    flex: 0 0 100%;
+    padding: 20px;
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
     cursor: pointer;
 }
 
 .image {
     width: 100%;
-    height: 100%;
-    flex: 1;
+    aspect-ratio: 15/7;
     overflow: hidden;
-    border-radius: 12px;
-    margin-bottom: 5px;
+    border-radius: 20px;
 }
 
 .projeto-img {
     width: 100%;
-    height: 100%;
+    height: 85%;
     object-fit: cover;
-    border-radius: 10px;
-    display: block;
+    object-position: center;
+    border-radius: 20px;
     cursor: pointer;
+    display:block;
+    border: 1px solid #8b8a8a;
 }
 
 .title {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px
 }
 
 .titulo-animado {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
 
     background: linear-gradient(270deg,
@@ -605,9 +671,8 @@ img {
 
 
 @media (max-width: 768px) {
-
-    header {
-        padding: 20px;
+     header {
+        padding: 5px;
 
         display: flex;
         justify-content: center;
@@ -619,55 +684,68 @@ img {
         margin-right: 0;
     }
 
+    .principal {
+        min-height: 100vh;
+    }
+
     .secao {
         padding: 60px 20px;
+        min-height: 100vh;
     }
 
     .titulo-secao {
-        font-size: 32px;
-    }
-
-    .principal h1 {
-        font-size: 40px;
-    }
-
-    .principal p {
-        font-size: 18px;
-    }
-
-    .texto-sobre h2 {
-        font-size: 28px;
+        font-size: 30px;
+        padding-top: 30px;
     }
 
     .sobre {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .img-sobre {
+        width: 80%;
+        height: auto;
+        display:flex;
     }
 
     .conteudo-sobre {
         margin-right: 0;
-        padding: 15px;
     }
 
-    .botoes-contato {
-        flex-direction: column;
-        gap: 20px;
+    .projeto-viewport {
+        max-width: 75%;
+        aspect-ratio: 16/11;
     }
 
-    .projeto-card {
-        width: 100%;
-        height: 40vh;
-
+    .card-content {
+        height: 100%;
     }
 
-    .projeto-carrossel {
-        gap: 20px;
+    .titulo-animado {
+        font-size: 1.5rem;
     }
 
     .carrossel-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.5rem;
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+
+    .carrossel-btn.prev {
+    left: 30px;
+    }
+
+    .carrossel-btn.next {
+    right: 30px;
     }
 }
 
@@ -699,35 +777,68 @@ img {
         padding-top: 30px;
     }
 
+    .sobre {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .projeto-viewport {
+        max-width: 80%;
+        height: 40vh;
+    }
+
+    .projeto-img {
+        width: 35%;
+        height: 80%;
+    }
+
+    .image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+
+    .img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .img-sobre {
         width: 80%;
         height: auto;
+        display:flex;
     }
 
     .carrossel-habilidades {
         align-items: center;
     }
 
-    .projeto-cards {
-        margin-top: 100px;
+    .carrossel-btn.prev {
+    left: 10px;
     }
 
-    .projeto-card {
-        margin-left: 5px;
-    }
-
-    .carrossel-btn {
-        margin-top: 40px;
+    .carrossel-btn.next {
+    right: 10px;
     }
 
     .botoes-contato {
         margin-top: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }
 
 @media (max-width: 400px) {
-    .projeto-cards {
-        transform: translateX(-360px);
+
+    .projeto-viewport {
+        max-width: 80%;
+        height: 50vh;
     }
 
     .carrossel-btn {
@@ -735,4 +846,5 @@ img {
         height: 30px;
         font-size: 1.5rem
     }
+
 }

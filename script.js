@@ -13,11 +13,14 @@ const menuLinks = document.querySelectorAll('.menu-link');
 
 const carrosselHabilidades = document.getElementById('carrossel');
 
+let modalOpen = false;
 
-document.body.classList.add('modal-open');
-document.body.classList.remove('modal-open');
+
+
 document.querySelectorAll('.projeto-card').forEach(card => {
   card.addEventListener('click', () => {
+    modalOpen = true;
+    stopAutoPlay();
     modalTitle.textContent = card.dataset.title;
     modalDescription.textContent = card.dataset.description;
     modalTech.textContent = card.dataset.tech;
@@ -30,6 +33,8 @@ document.querySelectorAll('.projeto-card').forEach(card => {
 // fechar clicando fora
 modal.addEventListener('click', () => {
   modal.classList.remove('active');
+  modalOpen = false;
+  startAutoPlay();
 });
 
 // impedir fechamento ao clicar dentro
@@ -40,6 +45,8 @@ modal.querySelector('.modal-content').addEventListener('click', e => {
 // botão fechar
 document.querySelector('.modal-close').addEventListener('click', () => {
   modal.classList.remove('active');
+  modalOpen = false;
+  startAutoPlay();
 });
 
 // Background
@@ -195,65 +202,6 @@ function criarCarrosselAutomatico(container, velocidade = 0.4) {
   animar();
 }
 
-
-
-window.addEventListener('load', () => {
-  const track = document.querySelector('.projeto-carrossel');
-  const prev = document.querySelector('.carrossel-btn.prev');
-  const next = document.querySelector('.carrossel-btn.next');
-
-  if (!track) return;
-
-  let cards = Array.from(track.children);
-
-  const cardStyle = getComputedStyle(track);
-  const gap = parseFloat(cardStyle.gap);
-  let cardWidth = cards[0].getBoundingClientRect().width + gap;
-
-  // CLONES
-  const firstClone = cards[0].cloneNode(true);
-  const lastClone = cards[cards.length - 1].cloneNode(true);
-
-  firstClone.classList.add('clone');
-  lastClone.classList.add('clone');
-
-  track.appendChild(firstClone);
-  track.insertBefore(lastClone, cards[0]);
-
-  cards = Array.from(track.children);
-
-  let index = 1;
-
-  function updatePosition(animate = true) {
-    track.style.transition = animate ? 'transform 0.5s ease' : 'none';
-    track.style.transform = `translateX(-${index * cardWidth}px)`;
-  }
-
-  updatePosition(false);
-
-  next.addEventListener('click', () => {
-    index++;
-    updatePosition();
-  });
-
-  prev.addEventListener('click', () => {
-    index--;
-    updatePosition();
-  });
-
-  track.addEventListener('transitionend', () => {
-    if (cards[index].classList.contains('clone')) {
-      index = cards[index] === firstClone ? 1 : cards.length - 2;
-      updatePosition(false);
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    cardWidth = cards[0].getBoundingClientRect().width + gap;
-    updatePosition(false);
-  });
-});
-
 AOS.init();
 
 window.addEventListener('scroll', () => {
@@ -282,3 +230,94 @@ window.addEventListener('scroll', () => {
   });
 });
 
+
+// carrossel projetos
+const carrossel = document.querySelector(".projeto-carrossel");
+let cards = document.querySelectorAll(".projeto-card");
+
+const totalOriginal = cards.length;
+
+// clones
+const firstClone = cards[0].cloneNode(true);
+const lastClone = cards[totalOriginal - 1].cloneNode(true);
+
+carrossel.appendChild(firstClone);
+carrossel.insertBefore(lastClone, carrossel.firstChild);
+
+cards = document.querySelectorAll(".projeto-card");
+
+let index = 1;
+let interval;
+let isAnimating = false;
+
+// posição inicial
+carrossel.style.transform = `translateX(-100%)`;
+
+// mover
+function atualizar() {
+  if (isAnimating) return;
+
+  isAnimating = true;
+  carrossel.style.transition = "transform 0.6s ease";
+  carrossel.style.transform = `translateX(-${index * 100}%)`;
+}
+
+// autoplay
+function startAutoPlay() {
+  stopAutoPlay();
+
+  interval = setInterval(() => {
+    index++;
+    atualizar();
+  }, 3500);
+}
+
+// parar
+function stopAutoPlay() {
+  clearInterval(interval);
+}
+
+// loop infinito seguro
+carrossel.addEventListener("transitionend", (e) => {
+  if (e.propertyName !== "transform") return;
+
+  if (index === totalOriginal + 1) {
+    carrossel.style.transition = "none";
+    index = 1;
+    carrossel.style.transform = `translateX(-100%)`;
+  }
+
+  if (index === 0) {
+    carrossel.style.transition = "none";
+    index = totalOriginal;
+    carrossel.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  isAnimating = false;
+});
+
+// botões
+document.querySelector(".next").addEventListener("click", () => {
+  stopAutoPlay();
+  index++;
+  atualizar();
+  startAutoPlay();
+});
+
+document.querySelector(".prev").addEventListener("click", () => {
+  stopAutoPlay();
+  index--;
+  atualizar();
+  startAutoPlay();
+});
+
+// 🖱️ PAUSA NO HOVER + CLIQUE
+const viewport = document.querySelector(".projeto-viewport");
+
+viewport.addEventListener("mouseenter", stopAutoPlay);
+viewport.addEventListener("mouseleave", () => {
+  if (!modalOpen) startAutoPlay();
+});
+
+// iniciar
+startAutoPlay();

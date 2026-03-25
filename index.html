@@ -33,7 +33,8 @@
         <div>
             <h1 class="animate__animated animate__zoomInUp">Olá, eu sou <span>João Neto</span>.</h1>
             <p>Desenvolvedor Full-Stack criativo, focado em criar experiências digitais inovadoras.</p>
-            <a href="./docs/JOAO_NETO_DEV.pdf" download class="button">Currículo <i class="fa-solid fa-download"></i></a>
+            <a href="./docs/JOAO_NETO_DEV.pdf" download class="button">Currículo <i
+                    class="fa-solid fa-download"></i></a>
             <a href="https://contate.me/5561986366632" class="button" id="button-whatsapp"><i
                     class="fa-brands fa-whatsapp fa-fade"></i> Contato</a>
         </div>
@@ -42,7 +43,9 @@
     <section class="secao" id="sobre">
         <h2 class="titulo-secao">Sobre mim</h2>
         <div class="sobre" data-aos="fade-up" data-aos-duration="3000">
-            <img class="img-sobre" src="./img/foto-perfil.png">
+            <div class="img">
+                <img class="img-sobre" src="./img/foto-perfil.png">
+            </div>
 
             <div class="conteudo-sobre">
                 <div class="texto-sobre">
@@ -179,8 +182,57 @@
                     💳 Stripe Elements — Interface segura de pagamento no frontend
                     🌐 Nginx — Servidor web para deploy e fallback de SPA"
                         data-link="https://dev-burguer-frontend.xgg4n8.easypanel.host">
-                        <img class="projeto-img" src="./img/Dev-grill.png" />
-                        <h2 class="titulo-animado title">Dev & Grill</h2>
+                        <div class="card-content">
+                            <img class="projeto-img" src="./img/Dev-grill.png" />
+                            <h2 class="titulo-animado title">Dev & Grill</h2>
+                        </div>
+                    </div>
+
+                    <div class="projeto-card" data-title="SpendNote"
+                        data-description=" SpendNote é uma aplicação full stack desenvolvida para gerenciamento de finanças pessoais, permitindo o controle completo de receitas, despesas e análise financeira em tempo real.
+
+                        O projeto simula um cenário real de produto digital, com autenticação segura, arquitetura escalável e integração entre frontend e backend, oferecendo uma experiência moderna e fluida ao usuário.
+
+                        A aplicação foi construída com foco em boas práticas de engenharia de software, incluindo separação de responsabilidades, segurança baseada em tokens e organização modular do código."
+                        data-tech="🔧 Backend: 
+                    ⚡ Node.js — ambiente de execução para construção da API
+                    📦 Express — framework para criação de rotas e middlewares
+                    🧠 TypeScript — tipagem estática para maior confiabilidade
+                    🗃️ Prisma ORM — mapeamento e acesso ao banco de dados
+                    🍃 MongoDB — banco de dados NoSQL orientado a documentos 
+                    🔐 Firebase Admin SDK — validação de autenticação via token
+                    🔥 Firebase Authentication — autenticação segura baseada em ID Token
+                    🔑 Zod — validação de dados e schemas
+                    📅 Day.js — manipulação de datas
+                    🌐 CORS — controle de acesso entre domínios
+                    🐳 Docker — containerização da aplicação
+
+                    💻 Frontend:
+                    ⚛️ React — construção de interfaces reativas
+                    ⚡ Vite — ferramenta de build rápida e otimizada
+                    🧠 TypeScript — tipagem estática no frontend
+                    🧭 React Router — navegação SPA com rotas dinâmicas
+                    🔗 Fetch / Axios — consumo da API REST
+                    🔥 Firebase Authentication — autenticação integrada ao frontend
+                    🪝 React Hooks — reutilização de lógica e controle de estado
+                    🌐 Context API — gerenciamento de estado global (auth)
+                    🎨 Tailwind CSS — estilização moderna, responsiva e utilitária
+                    🌐 Nginx — Servidor web para deploy e fallback de SPA
+                    
+                    📊 Funcionalidades:
+                    💰 Registro de receitas e despesas
+                    📊 Dashboard financeiro
+                    📅 Filtro por mês e ano
+                    📈 Resumo financeiro (saldo, entradas e saídas)
+                    🔐 Autenticação segura
+                    🔄 Atualização dinâmica de dados
+                    📱 Interface responsiva
+                    "
+                        data-link="https://spendnote-frontend.xgg4n8.easypanel.host">
+                        <div class="card-content">
+                            <img class="projeto-img" src="./img/SpendNote.png" />
+                            <h2 class="titulo-animado title">SpendNote</h2>
+                        </div>
                     </div>
 
                     <div class="projeto-card" data-title="iPhone 17"
@@ -190,8 +242,10 @@
                         🎨	Tailwind CSS - Framework utilitário de estilização com foco em responsividade
                         🏠	GitHub Pages - Plataforma de hospedagem estática para deploy contínuo"
                         data-link="https://dev-joaoneto.github.io/projeto-iphone17/">
-                        <img class="projeto-img" src="./img/Dev-iphone.png" />
-                        <h2 class="titulo-animado title">iPhone 17</h2>
+                        <div class="card-content">
+                            <img class="projeto-img" src="./img/Dev-iphone.png" />
+                            <h2 class="titulo-animado title">iPhone 17</h2>
+                        </div>
                     </div>
 
                     <div class="projeto-card" data-title="Dev Store"
@@ -206,8 +260,10 @@
                         📦 GitHub Pages – Hospedagem estática via GitHub sem servidor backend
                         🖼️ Imagens/Assets – Imagens de produtos exibidos no catálogo"
                         data-link="https://dev-joaoneto.github.io/dev_store/">
-                        <img class="projeto-img" src="./img/DevStore.png" />
-                        <h2 class="titulo-animado title">Dev Store</h2>
+                        <div class="card-content">
+                            <img class="projeto-img" src="./img/DevStore.png" />
+                            <h2 class="titulo-animado title">Dev Store</h2>
+                        </div>
                     </div>
 
                     <div class="projeto-card" data-title="Convert Money"
@@ -217,8 +273,10 @@
                         ⚙️ JavaScript — Lógica de conversão e manipulação de eventos
                         📦 GitHub — Versionamento de código e organização do repositório"
                         data-link="https://dev-joaoneto.github.io/ProjetoConvertMoney/">
-                        <img class="projeto-img" src="./img/Convert-money.png" />
-                        <h2 class="titulo-animado title">Convert Money</h2>
+                        <div class="card-content">
+                            <img class="projeto-img" src="./img/Convert-money.png" />
+                            <h2 class="titulo-animado title">Convert Money</h2>
+                        </div>
                     </div>
 
                 </div>
